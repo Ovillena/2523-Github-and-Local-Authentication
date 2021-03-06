@@ -23,10 +23,10 @@ function isUserValid(user, password) {
 }
 
 function findOrCreate(profile) {
-  console.log(
-    "\nthe name of profile is --------- " + JSON.stringify(profile._json.name)
-  );
-
+  //will first find if user is in DB, and if not then user will be added to DB
+  // console.log(
+  //   "\nthe name of profile is --------- " + JSON.stringify(profile._json.name)
+  // );
   let user = userModel.findById(parseInt(profile.id));
   if (user) {
     return user;
@@ -36,9 +36,9 @@ function findOrCreate(profile) {
       id: parseInt(profile.id),
       name: profile.displayName,
       email: profile.emails[0].value,
-      isAdmin: true,
+      isAdmin: true, // just making myself and anyone who signs it with github as admin for testing
     });
-    user = userModel.findById(parseInt(profile.id));
+    user = userModel.findById(parseInt(profile.id)); //this will find user again after they have been added to DB
     return user;
   }
 }
