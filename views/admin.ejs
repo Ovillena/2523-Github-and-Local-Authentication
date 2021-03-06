@@ -1,0 +1,20 @@
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome <%= user.name %></p>
+<a href="/auth/logout" class="btn btn-secondary">Logout</a>
+<h2><b>Current active sessions:</b></h2>
+
+<% let userID; for(let session of Object.keys(sessions)) { userID=
+JSON.parse(sessions[session])["passport"]["user"]; if(user.id==userID){%>
+<p>
+  SessionID: <%= session %> <br />UserID: <%= userID %> -----
+  <b>This is your own session.</b>
+  <br />
+  <a href="/auth/revoke/<%= session %>">Revoke Session</a>
+</p>
+<% } else{ %>
+<p>
+  SessionID: <%= session %> <br />UserID: <%= userID %>
+  <br />
+  <a href="/auth/revoke/<%= session %>">Revoke Session</a>
+</p>
+<% }} %>
